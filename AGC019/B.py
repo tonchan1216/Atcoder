@@ -1,5 +1,9 @@
+def conbi(n):
+	return int(n*(n-1)/2)
+
 A = input("")
-num = 1
-for i in range(len(A)-1):
-	num += len(A[i+1:].replace(A[i],''))
+num = 1 + conbi(len(A)) #l_C_2
+uniq = list(set(A))
+for i in uniq:
+	num -= conbi(A.count(i))
 print(num)
