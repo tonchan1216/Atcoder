@@ -12,19 +12,20 @@ for i in range(N):
 		if temp[1] in range(min(src['y'],dist['y']),max(src['y'],dist['y'])+1):
 			spring.append({'x':temp[0], 'y':temp[1]})
 
-# print(spring)
+# 基礎点
 path = (abs(src['x']-dist['x']) + abs(src['y']-dist['y'])) * 100
 if len(spring) > 0:
 	r = 10
 	if src['x'] == dist['x'] or src['y'] == dist['y'] :
-		#半円
+		#１直線半円あり
 		path += r*pi - 2*r 
 	else:
-		#1/4円
+		#1/4円あり
 		if (src['x']-dist['x'])*(src['y']-dist['y']) > 0:
 			spring.sort(key=lambda k: k['x'])
 		else:
 			spring.sort(key=lambda k: k['x'], reverse=True)
+		#最長路問題
 		L = [spring[0]['y']]
 		length = 1
 		for i in range(1,len(spring)):
@@ -32,13 +33,19 @@ if len(spring) > 0:
 				L.append(spring[i]['y'])
 				length += 1
 			else:
-				# 2分木にしたい
+				# 2分木探査風
 				start = 0
-				last = length
-				for j in range(length):
-					if spring[i]['y'] <= L[j]:
-						L[j] = spring[i]['y']
-						break
+				last = length - 1
+				while abs(last-start) > 0:
+					j = int((start+length)/2)
+					if spring[i]['y'] < L[j] :
+						last = j
+					else:
+						start = j
+				
+				L[last] = spring[i]['y']
+		
+		#半円があるかないか	
 		if length < min(abs(src['x']-dist['x']),abs(src['y']-dist['y'])) + 1:
 			path += (r*pi/2 - 2*r) * length
 		else:
