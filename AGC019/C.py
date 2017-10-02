@@ -38,11 +38,11 @@ if n > 0:
 			if L[length-1] < spring[i]['y']:
 				L[length] = spring[i]['y']
 				length += 1
-			else　:
+			else:
 				# 2分木探査風
 				start = 0
 				last = length - 1
-				while abs(last-start) > 0:
+				while (last-start) > 0:
 					j = int((start+length)/2)
 					if spring[i]['y'] < L[j] :
 						last = j
