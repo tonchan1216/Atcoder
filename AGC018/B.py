@@ -1,5 +1,5 @@
 import numpy as np
-from scipy import stats
+from collections import Counter
 
 input1 = input("").split(" ")
 N = int(input1[0])
@@ -14,8 +14,11 @@ result = N
 
 for j in range(M):
 	top = A[:,0]
-	mode = stats.mode(top)
-	count = len(np.where(top == mode)[0])
+	c = Counter(list(top))
+	most = c.most_common(1)
+	mode = most[0][0]
+	count = most[0][1]
+
 	if result > count:
 		result = count
 
