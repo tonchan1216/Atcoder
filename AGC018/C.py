@@ -5,7 +5,7 @@ def sum_coin(a,b):
 	#転置して該当列を合算
 	temp1 = list(map(list, zip(*a)))
 	temp2 = list(map(list, zip(*b)))
-	coins =	sum(temp1[2][:Y]) +	sum(temp1[3][Y:]) +	sum(temp2[3][:(-X)]) + sum(temp2[1][(-X):])
+	coins =	sum(temp1[2][:Y]) + sum(temp1[3][Y:]) + sum(temp2[3][:(-X)]) + sum(temp2[1][(-X):])
 	return coins
 
 ###入力###
